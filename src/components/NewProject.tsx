@@ -1,6 +1,20 @@
+import { useRef } from 'react';
+
 import Input from './Input.jsx';
 
+type InputRef = HTMLInputElement | HTMLTextAreaElement;
+
 export default function NewProject() {
+
+    const title = useRef<InputRef>(null);
+    const description = useRef<InputRef>(null);
+    const dueDate = useRef<InputRef>(null);
+
+    function handleSave() {
+
+    }
+
+
     return (
 
         <div className='w-[35rem] mt-16'>
@@ -13,11 +27,12 @@ export default function NewProject() {
                 </li>
             </menu>
             <div>
-                <Input label="Title" />
-                <Input label="Description" textarea />
-                <Input label="Due Date" />
+                <Input ref={title} label="Title" />
+                <Input ref={description} label="Description" textarea />
+                <Input ref={dueDate} label="Due Date" />
             </div>
         </div>
 
     )
 }
+
