@@ -2,9 +2,20 @@ import { useRef } from 'react';
 
 import Input from './Input.jsx';
 
+interface ProjectData {
+    title: string;
+    description: string;
+    dueDate: string
+}
+
+interface NewProjectProps {
+    onAdd: (project: ProjectData) => void;
+}
+
+
 type InputRef = HTMLInputElement | HTMLTextAreaElement;
 
-export default function NewProject() {
+export default function NewProject({ onAdd }: NewProjectProps) {
 
     const title = useRef<InputRef>(null);
     const description = useRef<InputRef>(null);
@@ -26,6 +37,11 @@ export default function NewProject() {
             dueDate: enteredDueDate,
         });
 
+        onAdd({
+            title: enteredTitle,
+            description: enteredDescription,
+            dueDate: enteredDueDate
+        });
     }
 
     return (
@@ -49,9 +65,9 @@ export default function NewProject() {
                 </li>
             </menu>
             <div>
-                <Input ref={title} label="Title" />
+                <Input type="text" ref={title} label="Title" />
                 <Input ref={description} label="Description" textarea />
-                <Input ref={dueDate} label="Due Date" />
+                <Input type="date" ref={dueDate} label="Due Date" />
             </div>
         </div>
 
