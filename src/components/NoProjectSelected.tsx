@@ -1,4 +1,4 @@
-import noProjectImage from "../assets/no-projects.png";
+import noProjectImage from "../assets/no-projects.png"; // @ts-ignore
 import Button from "./Button";
 
 interface NoProjectSelectedProps {
