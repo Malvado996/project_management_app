@@ -1,6 +1,34 @@
 import Tasks from "./Tasks";
 
-export default function SelectedProject({ project, onDelete }) {
+interface Project {
+    title: string;
+    description: string;
+    dueDate: string;
+
+    id?: number | string
+}
+
+interface SelectedProjectProps {
+    project?: Project,
+    onDelete: () => void,
+}
+
+export default function SelectedProject({ project, onDelete }: SelectedProjectProps) {
+
+    // Guard: if no project, show fallback UI (prevents undefined errors)
+    if (!project) {
+        return (
+            <div className="w-[35rem] mt-16 text-center">
+                <h2 className="text-2xl font-bold text-stone-600">
+                    No project selected
+                </h2>
+                <p className="mt-4 text-stone-500">
+                    Choose a project from the sidebar or create a new one.
+                </p>
+            </div>
+        );
+    }
+
 
     const formattedDate = new Date(project.dueDate).toLocaleString('en-US', {
         year: 'numeric',
