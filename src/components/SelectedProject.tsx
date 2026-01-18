@@ -8,12 +8,20 @@ interface Project {
     id?: number | string
 }
 
+interface Task {
+    id: number | string;
+    text: string
+}
+
 interface SelectedProjectProps {
     project?: Project,
     onDelete: () => void,
+    onAddTask: () => void,
+    onDeleteTask: () => void,
+    tasks: Task[],
 }
 
-export default function SelectedProject({ project, onDelete }: SelectedProjectProps) {
+export default function SelectedProject({ project, onDelete, onAddTask, onDeleteTask, tasks }: SelectedProjectProps) {
 
     // Guard: if no project, show fallback UI (prevents undefined errors)
     if (!project) {
@@ -51,7 +59,7 @@ export default function SelectedProject({ project, onDelete }: SelectedProjectPr
                 <p className="mb-4 text-stone-400">{formattedDate}</p>
                 <p className="text-stone-600 whitespace-pre-wrap">{project.description}</p>
             </header>
-            <Tasks />
+            <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks} />
         </div>
     )
 }
