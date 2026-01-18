@@ -7,7 +7,7 @@ interface Task {
 
 interface TasksProps {
     onAdd: () => void,
-    onDelete: () => void,
+    onDelete: (taskId: number | string) => void,
     tasks: Task[],
 }
 
@@ -24,7 +24,12 @@ export default function Tasks({ onAdd, onDelete, tasks }: TasksProps) {
             {tasks.map((task) =>
                 <li key={task.id} className="flex justify-between my-4">
                     <span>{task.text}</span>
-                    <button className="text-stone-700 hover:text-red-500">Clear</button>
+                    <button
+                        className="text-stone-700 hover:text-red-500"
+                        onClick={() => onDelete(task.id)}
+                    >
+                        Clear
+                    </button>
                 </li>
             )}
         </ul>}
